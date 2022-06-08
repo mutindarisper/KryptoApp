@@ -1,6 +1,10 @@
+import React, {useContext} from "react";
+
 import { AiFillAlipayCircle } from "react-icons/ai";
 import { SiEthereum } from 'react-icons/si'
 import { BsInfoCircle } from 'react-icons/bs'
+
+import { TransactionContext } from "../context/TransactionContext";
 
 import { Loader } from './';
 
@@ -22,10 +26,10 @@ const Input = ({ placeholder, name, type, value, handleChange }) => (
 
 
 const Welcome = () => {
+    const { connectWallet } = useContext( TransactionContext);
+    // console.log(value)
 
-    const connectWallet = () => {
-
-    }
+    
     const handleSubmit = () => {
 
     }
