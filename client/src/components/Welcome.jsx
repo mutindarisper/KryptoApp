@@ -25,13 +25,25 @@ const Input = ({ placeholder, name, type, value, handleChange }) => (
 )
 
 
-const Welcome = () => {
-    const { connectWallet, currentAccount } = useContext( TransactionContext);
+const Welcome = () => { //receiving props
+    // const { value } = useContext(TransactionContext)
+    const { connectWallet, currentAccount, formData, setFormData, sendTransaction, handleChange } = useContext( TransactionContext);
     // console.log(value)
 
     
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        // console.log('clicked me')
+        const {addressTo, amount, keyword, message } = formData; //destructuring the properties
 
+        e.preventDefault(); //prevent the page from reloading
+
+        if (!addressTo || !amount  || !keyword || !message ) return; //if there are no inputs, dont submit anything
+
+        // if ( addressTo && amount  && keyword && message ){
+             sendTransaction();
+        // }
+        
+        //else, call the sendTransaction function
     }
     return (
       <div className="flex w-full justify-center items-center">
@@ -105,10 +117,10 @@ const Welcome = () => {
 
                 {/* form */}
                 <div className="p-5 sm:w-96 w-full flex flex-col  justify-start items-center blue-glassmorphism">
-                    <Input  placeholder="Address To" name="address To" type="text" handleChange={ () => {}}/>
-                    <Input  placeholder="Amount (ETH)" name="amount" type="number" handleChange={ () => {}}/>
-                    <Input  placeholder="Keyword (Gif)" name="keyword" type="text" handleChange={ () => {}}/>
-                    <Input  placeholder="Enter Message" name="message" type="text" handleChange={ () => {}}/>
+                    <Input  placeholder="Address To" name="addressTo" type="text" handleChange={handleChange }/>
+                    <Input  placeholder="Amount (ETH)" name="amount" type="number" handleChange={ handleChange}/>
+                    <Input  placeholder="Keyword (Gif)" name="keyword" type="text" handleChange={ handleChange}/>
+                    <Input  placeholder="Enter Message" name="message" type="text" handleChange={  handleChange}/>
 
                     <div  className="h-[1px] w-full bg-gray-400 my-2"/>
 
